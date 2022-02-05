@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\BurgerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=BurgerRepository::class)
+ */
+class Burger  extends  Product
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    protected  ?int $id  ;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private ?string $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Menu::class, mappedBy="burger", orphanRemoval=true)
+     */
+    private Collection $menus;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->menus = new ArrayCollection();
+    }
+
+
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Menu[]
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    public function addMenu(Menu $menu): self
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus[] = $menu;
+            $menu->setBurger($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenu(Menu $menu): self
+    {
+        if ($this->menus->removeElement($menu)) {
+            // set the owning side to null (unless already changed)
+            if ($menu->getBurger() === $this) {
+                $menu->setBurger(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+}

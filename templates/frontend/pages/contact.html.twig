@@ -1,0 +1,58 @@
+{% extends 'frontend/frontendbase.html.twig' %}
+
+{% block title %}Contact | Brazil Burger {% endblock %}
+
+{% block body %}
+    {% include ('frontend/includes/breadcrumb.html.twig') with { title: 'Contact'}  %}
+    <div class="contact_map d-flex">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.27988966845!2d-74.25986771844386!3d40.697670067927376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1629696871317!5m2!1sen!2sin" class="border-0 w-100" style="height: 100%; min-height: 500px;" allowfullscreen=""></iframe>
+    </div>
+    <section class="section-padding bg-theme-primary">
+        <div class="container">
+            <div class="section-header-style-2">
+                <h6 class="text-light-green sub-title">Contact Form</h6>
+                <h3 class="text-light-black header-title">Get In Touch</h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form class="form_validate ajax_submit form_alert" action="sendmail.php" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="text-light-black fw-600">Full Name</label>
+                                    <input type="text" name="name" class="form-control form-control-submit" placeholder="Full Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="text-light-black fw-600">Email I'd</label>
+                                    <input type="email" name="email" class="form-control form-control-submit" placeholder="Email I'd">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="text-light-black fw-600">Phone No.</label>
+                                    <input type="text" name="phone" class="form-control form-control-submit" placeholder="Phone No.">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="text-light-black fw-600">Subject</label>
+                                    <input type="text" name="subject" class="form-control form-control-submit" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="text-light-black fw-600">Message</label>
+                                    <textarea class="form-control form-control-submit" name="message" rows="6" placeholder="Write Message"></textarea>
+                                </div>
+                                <button type="submit" class="btn-second btn-submit full-width">Submit</button>
+                                <div class="server_response w-100"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

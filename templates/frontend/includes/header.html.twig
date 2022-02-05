@@ -1,0 +1,91 @@
+<!-- top-Navigation -->
+<div class="top-header">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="top-left">
+                    <ul class="top-info">
+                        <li><a href="#"><i class="fas fa-phone-alt"></i> +221 77 862 84 71</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contact@bresil-burger.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="top-right">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                    {% if app.user %}
+                    <a href="{{ path('app_logout') }}" class="top-btn">se deconnecter </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navigation -->
+<header class="header">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-12">
+                <div class="navigation">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="{{ asset('assets/img/logo1.png') }}" class="image-fit" alt="logo">
+                        </a>
+                    </div>
+                    <div class="main-navigation">
+                        <nav>
+                            <ul class="main-menu">
+                                <li class="menu-item "><a href="{{ path('home') }}" class="text-light-black">Accueil</a>
+                                </li>
+                                <li class="menu-item"><a href="{{ path('about') }}" class="text-light-black">A Propos</a>
+                                </li>
+                                <li class="menu-item "><a href="{{ path('restaurant') }}" class="text-light-black">Restaurant</a>
+                                </li>
+                                <li class="menu-item "><a href="{{ path('contact') }}" class="text-light-black">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="right-side-navigation">
+                        <ul>
+                            <li class="hamburger-menu">
+                                <a href="#" class="menu-btn"> <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </a>
+                            </li>
+                            <li class="user-details">
+
+                                {% if app.user %}
+                                    <a href="{{ path('account') }}"> <i class="pe-7s-user"></i> <span>{{ app.user.firstname }}</span> </a>
+                                    {% else %}
+                                    <a href="{{ path('app_login') }}"> <i class="pe-7s-user"></i> <span> Se Connecter</span> </a>
+                                {% endif %}
+
+
+                            </li>
+                            <li class="wishlist"><a href="#" class="text-dark-red"><i class="pe-7s-bell"></i></a>
+                                <span class="cart" id="bell">0</span>
+                            </li>
+                            <li class="cart"><a href="{{ path('cart') }}" class="text-dark-red"><i class="pe-7s-cart"></i></a>
+                                <span class="cart" id="cart">
+                                      {% if app.session.get('cart') %}
+                                          {{ app.session.get('fullCart').totalItems }}
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

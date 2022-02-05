@@ -1,0 +1,47 @@
+{% extends 'backend/backendbase.html.twig' %}
+
+{% block title %}Complement index{% endblock %}
+
+{% block body %}
+    <h3>Complement index</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Slug</th>
+                <th>IsOfferOfDay</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for complement in complements %}
+            <tr>
+                <td>{{ complement.id }}</td>
+                <td>{{ complement.name }}</td>
+                <td> <img src="{{ complement.image }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="" height="150" width="100"></td>
+                <td>FCFA {{ complement.price|number_format(2) }}</td>
+                <td>{{ complement.createdAt ? complement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ complement.updatedAt ? complement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ complement.slug }}</td>
+                <td>{{ complement.isOfferOfDay ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('crud_complement_show', {'id': complement.id}) }}">show</a>
+                    <a href="{{ path('crud_complement_edit', {'id': complement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('crud_complement_new') }}">Create new</a>
+{% endblock %}

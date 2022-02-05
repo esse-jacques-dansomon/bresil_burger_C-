@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}BRESIL BURGER!{% endblock %}</title>
+    {% block stylesheets %}
+        {% include('backend/includes/sytle.html.twig') %}
+    {% endblock %}
+</head>
+<body class="nav-md ">
+<div class="container body">
+    <div class="main_container">
+    {% include('backend/includes/sidebar.html.twig') %}
+    {% include('backend/includes/header.html.twig') %}
+        <div class="right_col" role="main">
+            <div class="">
+    {% block body %}
+
+
+    {% endblock %}
+            </div>
+        </div>
+    {% include('backend/includes/footer.html.twig') %}
+    {% block javascripts %}
+        {% include('backend/includes/script.html.twig') %}
+    {% endblock %}
+    </div>
+</div>
+</body>
+</html>

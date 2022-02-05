@@ -1,0 +1,189 @@
+{% extends 'frontend/frontendbase.html.twig' %}
+
+{% block title %} {{ product.name }} | Brazil Burger {% endblock %}
+
+{% block body %}
+    {% include ('frontend/includes/breadcrumb.html.twig') with { title: product.name }  %}
+
+    <form action="{{ path('add_to_cart', {'id': product.id}) }}" method="POST">
+
+<!--Shop-Details-->
+<section class="section-padding  bg-theme-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="shop-detail-image">
+                    <div class="detail-slider">
+                        <div class="swiper-container gallery-top">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="#" class="popup">
+                                        <img src="{{ product.image }}" class="img-fluid full-width" alt="slider">
+                                    </a>
+                                    <div class="shop-type-tag"> <a href="#" class="bg-custom-black type-tag">Sale</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add Arrows -->
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
+                        </div>
+                        <div class="swiper-container gallery-thumbs ">
+
+                            <!-- Add Arrows -->
+                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="shop-detail-contents mb-md-40 mt-md-40">
+                    <div class="shop-detail-content-wrapper">
+                        <h6 class="text-custom-black">{{ product.name }}</h6>
+                    </div>
+
+                    <div class="price">
+                        <h5 class="text-color-primary price-tag">FCFA {{ product.price|number_format(2) }}
+                        </h5>
+                    </div>
+                    <div class="product-full-des mb-20">
+                        <p class="mb-0">{{ product.description }} </p>
+                    </div>
+                    <div class="quantity mb-xl-20">
+                        <p class="text-custom-black mb-0 mr-0 fw-600">Qty:</p>
+                        <div class="product-qty-input">
+                            <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i>
+                            </button>
+                            <label>
+                                <input type="text" class="form-control form-control-qty text-center mx-2" name="qte" value="1" >
+                            </label>
+                            <button class="plus-btn" type="button" name="button"> <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="shop-bottom">
+                        <div class="shop-meta mt-20">
+                            <p class="text-custom-black mb-0 fw-600">Categories:</p>
+                            <ul class="list-inline ml-2">
+                                <li class="list-inline-item"><a href="#">{{ product.category }} </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product-btn mt-20">
+                            <button type="submit" class="btn-solid with-line ml-2">Add to Cart  </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="shop-detail-description-sec">
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"> <a class="nav-link  active" data-toggle="tab" href="#description">Description</a>
+                            </li>
+                            {% if  product.category == 'Menu' %}
+                            <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#reviews">Composition(s)</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="description">
+                                <p class=" mb-xl-20">{{ product.description }}</p>
+                            </div>
+                            <div class="tab-pane fade" id="reviews">
+                                {% if  product.category == 'Menu' %}
+                                <!-- composition  -->
+                                <div class="comment-box p-relative">
+                                    <div id="comment-box">
+                                        <ul class="comments">
+                                            <li class="comment">
+                                                <article>
+                                                    <div class="comment-avatar">
+                                                        <img src="{{ product.burger.image }}"  alt="comment">
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <div class="comment-meta">
+                                                            <div class="comment-meta-header">
+                                                                <h6 class="text-color-secondary fw-500 author mb-3">{{ product.burger.name }}</h6>
+                                                                <span style="font-size: 15px">FCFA  <b>{{ product.burger.price|number_format(2) }}</b></span>
+                                                            </div>
+                                                            <div class="comment-meta-reply"> <a href="{{ path('product', {'slug':product.burger.slug}) }}" class="comment-reply-link btn-first red-btn text-custom-black">Voir</a>
+                                                            </div>
+                                                        </div>
+
+                                                            <div class="comment">
+                                                                <p>{{ product.burger.description }}</p>
+                                                            </div>
+
+
+                                                    </div>
+                                                </article>
+                                            </li>
+                                            {% for complement in  product.complements  %}
+                                            <li class="comment">
+                                                <article>
+                                                    <div class="comment-avatar">
+                                                        <img src="{{ complement.image }}"  alt="comment">
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <div class="comment-meta">
+                                                            <div class="comment-meta-header">
+                                                                <h6 class="text-color-secondary fw-500 author mb-3">{{ complement.name }}</h6>
+                                                                <span style="font-size: 15px">FCFA
+                                                                    <b>{{ complement.price|number_format(2) }}</b>
+                                                                    </span>
+                                                            </div>
+
+                                                        </div>
+                                                        {% if complement.description is defined %}
+                                                        <div class="comment">
+                                                            <p>{{ complement.description }}</p>
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </article>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- composition -->
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Browse by category -->
+    <section class="browse-cat bg-theme-primary section-padding">
+        <div class="container-fluid custom-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header-left title">
+                        <h3 class="text-light-black header-title">Nos Complements </h3>
+                        <span class="fs-16 align-self-center"><a href="#">VOir tout</a></span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    {% include "frontend/includes/complements.html.twig" with category %}
+                    {% include ("frontend/includes/complements.html.twig" ) with { "category" :  boissons }  %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Browse by category -->
+
+
+</section>
+    </form>
+
+    <!--Shop-Details End-->
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'backend/backendbase.html.twig' %}
+
+{% block title %}Burger index{% endblock %}
+
+{% block body %}
+    <h1>Burger index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Slug</th>
+                <th>IsOfferOfDay</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for burger in burgers %}
+            <tr>
+                <td>{{ burger.id }}</td>
+                <td>{{ burger.name }}</td>
+                <td> <img src="{{ burger.image }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+                <td>{{ burger.price }}</td>
+                <td>{{ burger.createdAt ? burger.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ burger.updatedAt ? burger.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ burger.slug }}</td>
+                <td>{{ burger.isOfferOfDay ? 'Yes' : 'No' }}</td>
+                <td>{{ burger.description }}</td>
+                <td>
+                    <a href="{{ path('crud_burger_show', {'id': burger.id}) }}">show</a>
+                    <a href="{{ path('crud_burger_edit', {'id': burger.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('crud_burger_new') }}">Create new</a>
+{% endblock %}

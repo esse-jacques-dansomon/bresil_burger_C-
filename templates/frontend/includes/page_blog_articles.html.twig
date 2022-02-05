@@ -1,0 +1,47 @@
+{% if articles %}
+    <div class="col-xl-9 col-lg-8">
+        <div class=" full-width">
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <article class="blog-item blog-item-box">
+                            <div class="blog-item-img">
+                                <img class="blog-img" src="/images/articles/{{ article.image }}" alt="img">
+                                {% if article.postsCategory %}
+                                    <ul class="blog-item-badge">
+                                        {% for key, categorie in article.postsCategory %}
+                                            {% if key<=1 %}
+                                                <li><a href="#">{{ categorie.title }}</a> </li>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+
+                            </div>
+                            <div class="blog-item-content">
+                                <h5 class="blog-item-title">
+                                    <a href="{{ path('article_detail', {'slug': article.slug }) }}">{{ article.title }}</a>
+                                </h5>
+                                <p>
+                                    {{ article.content|striptags|slice(1, 150) }} ...
+                                </p>
+                                <div class="blog-item-details">
+                                    <span class="blog-item-date"><i class="fas fa-calendar-week"></i>{{ article.createdAt|date('d-M-Y') }}</span>
+                                    <span><i class="fas fa-comment-dots"></i> 501</span></div>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="custom-pagination align-item-center">
+            <nav aria-label="Page navigation example">
+                {{ knp_pagination_render(articles) }}
+
+            </nav>
+        </div>
+    </div>
+{% else  %}
+    pas d'articles
+{% endif %}

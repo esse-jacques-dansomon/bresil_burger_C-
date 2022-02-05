@@ -1,0 +1,13 @@
+{% extends 'backend/backendbase.html.twig' %}
+
+{% block title %}Edit Menu{% endblock %}
+
+{% block body %}
+    <h1>Edit Menu</h1>
+
+    {{ include('backend/pages/crud_menu/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('crud_menu_index') }}">back to list</a>
+
+    {{ include('backend/pages/crud_menu/_delete_form.html.twig') }}
+{% endblock %}

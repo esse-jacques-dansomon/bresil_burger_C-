@@ -1,0 +1,21 @@
+<div class="category-slider swiper-container">
+    <div class="swiper-wrapper">
+        {% for order in category %}
+            <div class="swiper-slide">
+                <a href="" class="categories">
+                    <div class="icon text-custom-white bg-light-green ">
+                        <img src="{{ order.image }}" class="rounded-circle" alt="categories">
+                    </div>
+                    <span class="text-light-black cat-name">
+                        <input type="checkbox" id="{{ order.id }}" name="complement[]" value="{{ order.id }}">
+                        <label for="music">{{ order.name }}</label>
+                    </span>
+                    <span class="text-light-black cat-name">FCFA {{ order.price|number_format(2) }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>

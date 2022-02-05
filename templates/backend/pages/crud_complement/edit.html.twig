@@ -1,0 +1,13 @@
+{% extends 'backend/backendbase.html.twig' %}
+
+{% block title %}Edit Complement{% endblock %}
+
+{% block body %}
+    <h4>Edit Complement</h4>
+
+    {{ include('backend/pages/crud_complement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('crud_complement_index') }}">back to list</a>
+
+    {{ include('backend/pages/crud_complement/_delete_form.html.twig') }}
+{% endblock %}

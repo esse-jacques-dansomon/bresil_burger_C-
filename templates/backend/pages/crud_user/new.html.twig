@@ -1,0 +1,10 @@
+{% extends 'backend/backendbase.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+
+    {{ include('backend/pages/crud_user/_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+    <a href="{{ path('crud_user_index') }}">Retourner </a>
+{% endblock %}

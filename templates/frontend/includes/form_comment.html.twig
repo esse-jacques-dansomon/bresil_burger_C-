@@ -1,0 +1,25 @@
+<div class="comment-form">
+    <div class="section-header-left">
+        <h6 class="text-light-black header-title">Leave a Reply</h6>
+    </div>
+    {{ form_start(commentForm) }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                     {{ form_row(commentForm.userName) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_row(commentForm.userEmail) }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_row(commentForm.content) }}
+                </div>
+                <button type="submit" class="btn-second btn-submit full-width">Commenter</button>
+            </div>
+        </div>
+    {{ form_end(commentForm) }}
+</div>

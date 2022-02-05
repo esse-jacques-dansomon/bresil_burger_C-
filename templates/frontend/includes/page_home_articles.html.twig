@@ -1,0 +1,44 @@
+{% if articles %}
+    <div class="col-xl-12 col-lg-8">
+        <div class=" full-width">
+        	<div class="row">
+				<div class="col-12">
+					<div class="section-header-left">
+						<h3 class="text-light-black header-title title"> Our Promise To The Community</h3>
+					</div>
+				</div>
+			</div>
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <article class="blog-item blog-item-box">
+                            <div class="blog-item-img">
+                                <img class="blog-img" src="/images/articles/{{ article.image }}" alt="img">
+                                {% if article.postsCategory %}
+                                    <ul class="blog-item-badge">
+                                        {% for key, categorie in article.postsCategory %}
+                                            {% if key<=1 %}
+                                                <li><a href="#">{{ categorie.title }}</a> </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                            <div class="blog-item-content">
+                                <h5 class="blog-item-title">
+                                    <a href="{{ path('article_detail', {'slug': article.slug }) }}">{{ article.title }}</a>
+                                </h5>
+                                <div class="blog-item-details">
+                                    <span class="blog-item-date"><i class="fas fa-calendar-week"></i>{{ article.createdAt|date('d-M-Y') }}</span>
+                                    <span><i class="fas fa-comment-dots"></i> 501</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else  %}
+    pas d'articles
+{% endif %}
